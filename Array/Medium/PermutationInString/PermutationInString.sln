@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PermutationInString", "PermutationInString\PermutationInString.csproj", "{0464E92D-0E42-46C2-A4F6-8C73483A1D3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0464E92D-0E42-46C2-A4F6-8C73483A1D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0464E92D-0E42-46C2-A4F6-8C73483A1D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0464E92D-0E42-46C2-A4F6-8C73483A1D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0464E92D-0E42-46C2-A4F6-8C73483A1D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D090A59E-88C3-413C-A653-39C583797BD8}
+	EndGlobalSection
+EndGlobal
