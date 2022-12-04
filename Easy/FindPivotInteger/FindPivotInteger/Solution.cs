@@ -4,28 +4,30 @@ public class Solution
 {
     public static int PivotInteger(int n)
     {
-        // 8
-        // 1 2 3 4 5 6 7 8
-        // {1: 1, 3: 2, 6: 3, 10: 4, 15: 5, 21: 6}
-        int sum = 0;
-        var d = new Dictionary<int, int>();
-        for (int i = 1; i <= n; i++)
-        {
-            sum += i;
-            d[sum] = i;
-        }
+        int leftSum = 1;
+        int rightSum = n;
 
-        sum = 0;
-        for (int i = n; i > 0; i--)
+        int left = 1;
+        int right = n;
+        while (left <= right)
         {
-            sum += i;
-            if (d.ContainsKey(sum) && d[sum] == i)
+            if ((leftSum == rightSum) && (left == right))
             {
-                return d[sum];
+                return left;
+            }
+
+            if (leftSum < rightSum)
+            {
+                left += 1;
+                leftSum += left;
+            }
+            else
+            {
+                right -= 1;
+                rightSum += right;
             }
         }
 
         return -1;
-
     }
 }
