@@ -1,21 +1,16 @@
 namespace NumberOf1Bits;
 
 public class Solution {
-    public int HammingWeight(uint n) {
-        var bits = new List<uint>();
+    public int HammingWeight(uint n)
+    {
+        var count = 0;
         while (n > 0)
         {
-            bits.Add(n % 2);
-            n /= 2;
-        }
-
-        var count = 0;
-        for (int i = bits.Count - 1; i >= 0; i--)
-        {
-            if (bits[i] > 0)
+            if (n % 2 == 1)
             {
                 count += 1;
             }
+            n /= 2;
         }
 
         return count;
