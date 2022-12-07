@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImpelementStackUsingQueue", "ImpelementStackUsingQueue\ImpelementStackUsingQueue.csproj", "{15B44B11-52BF-4DF5-8BBB-2CFA08E4E216}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15B44B11-52BF-4DF5-8BBB-2CFA08E4E216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B44B11-52BF-4DF5-8BBB-2CFA08E4E216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B44B11-52BF-4DF5-8BBB-2CFA08E4E216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B44B11-52BF-4DF5-8BBB-2CFA08E4E216}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
