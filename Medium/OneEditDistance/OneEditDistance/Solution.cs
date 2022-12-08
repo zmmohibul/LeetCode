@@ -4,35 +4,51 @@ public class Solution
 {
     public bool IsOneEditDistance(string s, string t) 
     {
-        if (s.Length - 1 != t.Length || s.Length + 1 != t.Length || s.Length != t.Length || s.Equals(t))
+        if ((s.Length - 1 != t.Length && s.Length + 1 != t.Length && s.Length != t.Length) || s.Equals(t))
         {
             return false;
         }
 
-        var sFreq = new Dictionary<char, int>();
-        for (int i = 0; i < s.Length; i++)
-        {
-            var c = s[i];
-            sFreq[c] = sFreq.GetValueOrDefault(c, 0) + 1;
-        }
-        
-        var tFreq = new Dictionary<char, int>();
-        for (int i = 0; i < s.Length; i++)
-        {
-            var c = t[i];
-            tFreq[c] = tFreq.GetValueOrDefault(c, 0) + 1;
-        }
-
+        int i = 0;
+        int j = 0;
         int count = 0;
-        foreach (var (c, cnt) in sFreq)
+        while (i < s.Length && j < t.Length)
         {
-            if (!tFreq.ContainsKey(c))
+            if (s.Length < t.Length)
             {
-                count += 1;
+                if (s[i] == t[j])
+                {
+                    i += 1;
+                }
+                else
+                {
+                    count += 1;
+                }
+
+                j += 1;
+
+            }
+            else if (t.Length < s.Length)
+            {
+                if (s[i] == t[j])
+                {
+                    j += 1;
+                }
+                else
+                {
+                    count += 1;
+                }
+                i += 1;
             }
             else
             {
-                count = Math.Abs(tFreq[c] - cnt);
+                if (s[i] != t[j])
+                {
+                    count += 1;
+                }
+
+                i += 1;
+                j += 1;
             }
 
             if (count > 1)
