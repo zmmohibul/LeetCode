@@ -2,40 +2,38 @@ namespace RelativeSortArray;
 
 public class Solution {
     public int[] RelativeSortArray(int[] arr1, int[] arr2) {
-        var arr2hs = new HashSet<int>();
-        for (int i = 0; i < arr2.Length; i++)
+        var elementsInArr2 = new HashSet<int>();
+        foreach (var element in arr2)
         {
-            arr2hs.Add(arr2[i]);
+            elementsInArr2.Add(element);
         }
 
-        var pq = new PriorityQueue<int, int>();
-        var arr1Freq = new Dictionary<int, int>();
-        for (int i = 0; i < arr1.Length; i++)
+        var arr1ElementsNotInArr2 = new PriorityQueue<int, int>();
+        var elementCountOfArr1 = new Dictionary<int, int>();
+        foreach (var element in arr1)
         {
-            if (!arr2hs.Contains(arr1[i]))
+            if (!elementsInArr2.Contains(element))
             {
-                pq.Enqueue(arr1[i], arr1[i]);
+                arr1ElementsNotInArr2.Enqueue(element, element);
             }
-            arr1Freq[arr1[i]] = arr1Freq.GetValueOrDefault(arr1[i], 0) + 1;
+            elementCountOfArr1[element] = elementCountOfArr1.GetValueOrDefault(element, 0) + 1;
         }
 
-        var a = 0;
-        for (int i = 0; i < arr2.Length; i++)
+        var currentIndexArr1 = 0;
+        foreach (var element in arr2)
         {
-            var n = arr2[i];
-            var nCount = arr1Freq[n];
-            for (int j = 0; j < nCount; j++)
+            var elementCount = elementCountOfArr1[n];
+            for (int j = 0; j < elementCount; j++)
             {
-                arr1[a] = n;
-                a += 1;
+                arr1[currentIndexArr1] = element;
+                currentIndexArr1 += 1;
             }
-            arr1Freq.Remove(n);
         }
 
-        while (pq.Count > 0)
+        while (arr1ElementsNotInArr2.Count > 0)
         {
-            arr1[a] = pq.Dequeue();
-            a += 1;
+            arr1[currentIndexArr1] = arr1ElementsNotInArr2.Dequeue();
+            currentIndexArr1 += 1;
         }
 
         return arr1;
