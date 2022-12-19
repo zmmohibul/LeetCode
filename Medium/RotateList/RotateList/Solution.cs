@@ -10,8 +10,8 @@ public class ListNode {
 }
 
 public class Solution {
-    public ListNode RotateRight(ListNode head, int k)
-    {
+    public ListNode RotateRight(ListNode head, int k) {
+
         if (k == 0 || head == null || head.next == null)
         {
             return head;
@@ -31,7 +31,6 @@ public class Solution {
             length += 1;
             curr = curr.next;
         }
-        
 
         curr = head;
         var n = 0;
@@ -41,20 +40,29 @@ public class Solution {
             return head;
         }
         
-        if (k > length)
+        if (k > length) 
         {
-            k /= length;
-            n = length - k;
+            n = k % length;
         }
         else
         {
-            n = length - k;
+            n = k;
         }
+
+        if (n == 0)
+        {
+            return head;
+        }
+
+        Console.WriteLine(n);
+        n = length - n;
         
-        for (int i = 0; i < n - 1; i++)
+        for (int i = 1; i < n; i++)
         {
             curr = curr.next;
         }
+
+
 
         tempHead = curr.next;
         curr.next = null;
