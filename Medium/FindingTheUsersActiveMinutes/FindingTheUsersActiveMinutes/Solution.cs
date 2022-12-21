@@ -5,28 +5,23 @@ public class Solution
     public int[] FindingUsersActiveMinutes(int[][] logs, int k)
     {
         var userActiveMinutes = new Dictionary<int, HashSet<int>>();
-        for (int i = 0; i < logs.Length; i++)
+        foreach (var log in logs)
         {
-            var curLogId = logs[i][0];
-            var curLogTime = logs[i][1];
-            if (!userActiveMinutes.ContainsKey(curLogId))
+            var userId = log[0];
+            var taskPerformedAtTime = log[1];
+            
+            if (!userActiveMinutes.ContainsKey(userId))
             {
-                userActiveMinutes[curLogId] = new HashSet<int>();
+                userActiveMinutes[userId] = new HashSet<int>();
             }
-
-            userActiveMinutes[curLogId].Add(curLogTime);
+            
+            userActiveMinutes[userId].Add(taskPerformedAtTime);
         }
 
         int[] result = new int[k];
-        for (int index = 0; index < userActiveMinutes.Count; index++) {
-            var item = userActiveMinutes.ElementAt(index);
-            var userId = item.Key;
-            var totalTime = item.Value.Count;
-            
-            if (totalTime <= k)
-            {
-                result[totalTime - 1]++;
-            }
+        foreach (var (userId, totalTimeTaken) in userActiveMinutes)
+        {
+            result[totalTimeTaken.Count - 1]++;
         }
 
         return result;
