@@ -14,8 +14,6 @@ public class TreeNode {
 
 public class Solution
 {
-    public int Sum { get; set; } = 0;
-    public int Count { get; set; } = 0;
     public int Result { get; set; } = 0;
     
     public int AverageOfSubtree(TreeNode root)
@@ -30,16 +28,12 @@ public class Solution
         while (queue.Count > 0) 
         {
             var node = queue.Dequeue();
-            CalculateAverage(node);
-            var average = Sum / Count;
+            var average = CalculateAverage(node);
 
             if (average == node.val)
             {
                 Result++;
             }
-
-            Sum = 0;
-            Count = 0;
 
             if (node.left != null)
             {
@@ -55,17 +49,30 @@ public class Solution
         return Result;
     }
 
-    public void CalculateAverage(TreeNode T)
+    public int CalculateAverage(TreeNode T)
     {
-        if (T == null)
+        var queue = new Queue<TreeNode>();
+        queue.Enqueue(T);
+
+        int sum = 0;
+        int count = 0;
+        while (queue.Count > 0)
         {
-            return;
+            var node = queue.Dequeue();
+            sum += node.val;
+            count++;
+
+            if (node.left != null)
+            {
+                queue.Enqueue(node.left);
+            }
+
+            if (node.right != null)
+            {
+                queue.Enqueue(node.right);
+            }
         }
-        
-        CalculateAverage(T.left);
-        CalculateAverage(T.right);
-        
-        Sum += T.val;
-        Count++;
+
+        return sum / count;
     }
 }
