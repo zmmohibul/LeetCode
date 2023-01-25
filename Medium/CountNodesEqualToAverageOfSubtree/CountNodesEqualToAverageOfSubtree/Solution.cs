@@ -14,65 +14,47 @@ public class TreeNode {
 
 public class Solution
 {
+    public int Sum { get; set; } = 0;
+    public int Count { get; set; } = 0;
     public int Result { get; set; } = 0;
-    
+
     public int AverageOfSubtree(TreeNode root)
     {
         if (root == null)
         {
             return 0;
         }
-        
-        var queue = new Queue<TreeNode>();
-        queue.Enqueue(root);
-        while (queue.Count > 0) 
-        {
-            var node = queue.Dequeue();
-            var average = CalculateAverage(node);
 
-            if (average == node.val)
-            {
-                Result++;
-            }
-
-            if (node.left != null)
-            {
-                queue.Enqueue(node.left);
-            }
-
-            if (node.right != null)
-            {
-                queue.Enqueue(node.right);
-            }
-        }
-
+        CalculateAverage(root);
         return Result;
+
+
     }
 
-    public int CalculateAverage(TreeNode T)
+    public int[] CalculateAverage(TreeNode T)
     {
-        var queue = new Queue<TreeNode>();
-        queue.Enqueue(T);
-
-        int sum = 0;
-        int count = 0;
-        while (queue.Count > 0)
+        if (T == null)
         {
-            var node = queue.Dequeue();
-            sum += node.val;
-            count++;
-
-            if (node.left != null)
-            {
-                queue.Enqueue(node.left);
-            }
-
-            if (node.right != null)
-            {
-                queue.Enqueue(node.right);
-            }
+            return new int[] { 0, 0 };
         }
 
-        return sum / count;
+        var sumCountLeft = CalculateAverage(T.left);
+        Sum = 0;
+        Count = 0;
+        
+        var sumCountRight = CalculateAverage(T.right);
+        Sum = 0;
+        Count = 0;
+
+        var totalSum = sumCountLeft[0] + sumCountRight[0] + T.val;
+        var totalCount = sumCountLeft[1] + sumCountRight[1] + 1;
+        
+        var average = totalSum / totalCount;
+        if (T.val == average)
+        {
+            Result++;
+        }
+
+        return new[] { totalSum, totalCount };
     }
 }
