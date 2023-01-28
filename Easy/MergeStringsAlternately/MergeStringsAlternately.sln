@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergeStringsAlternately", "MergeStringsAlternately\MergeStringsAlternately.csproj", "{AD68241E-3718-4401-A8F3-8F80DEE06CFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD68241E-3718-4401-A8F3-8F80DEE06CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD68241E-3718-4401-A8F3-8F80DEE06CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD68241E-3718-4401-A8F3-8F80DEE06CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD68241E-3718-4401-A8F3-8F80DEE06CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
