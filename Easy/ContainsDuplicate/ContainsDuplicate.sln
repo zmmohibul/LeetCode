@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainsDuplicate", "ContainsDuplicate\ContainsDuplicate.csproj", "{EA27C90D-A113-4BF4-97EF-3BEC4B72F7FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA27C90D-A113-4BF4-97EF-3BEC4B72F7FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA27C90D-A113-4BF4-97EF-3BEC4B72F7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA27C90D-A113-4BF4-97EF-3BEC4B72F7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA27C90D-A113-4BF4-97EF-3BEC4B72F7FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
