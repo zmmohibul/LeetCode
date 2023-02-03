@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigzagConversion", "ZigzagConversion\ZigzagConversion.csproj", "{979370F5-7078-491C-9949-E80068F7B075}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{979370F5-7078-491C-9949-E80068F7B075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{979370F5-7078-491C-9949-E80068F7B075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{979370F5-7078-491C-9949-E80068F7B075}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{979370F5-7078-491C-9949-E80068F7B075}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
