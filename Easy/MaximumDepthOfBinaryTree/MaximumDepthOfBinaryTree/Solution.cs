@@ -20,9 +20,34 @@ public class Solution
             return 0;
         }
 
-        int leftTreeDepth = MaxDepth(root.left);
-        int rightTreeDepth = MaxDepth(root.right);
+        var queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+        int count = 0;
+        int n = 1;
+        while (queue.Count > 0)
+        {
+            int inn = 0;
+            for (int i = 0; i < n; i++)
+            {
+                var node = queue.Dequeue();
+                
+                if (node.left != null)
+                {
+                    queue.Enqueue(node.left);
+                    inn++;
+                }
 
-        return (leftTreeDepth > rightTreeDepth ? leftTreeDepth : rightTreeDepth) + 1;
+                if (node.right != null)
+                {
+                    queue.Enqueue(node.right);
+                    inn++;
+                }
+            }
+
+            count++;
+            n = inn;
+        }
+
+        return count;
     }
 }
