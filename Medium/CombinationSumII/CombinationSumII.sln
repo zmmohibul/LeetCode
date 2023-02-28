@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombinationSumII", "CombinationSumII\CombinationSumII.csproj", "{9ECF09D9-34AC-4214-85A1-0C84EFC51C3E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9ECF09D9-34AC-4214-85A1-0C84EFC51C3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ECF09D9-34AC-4214-85A1-0C84EFC51C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ECF09D9-34AC-4214-85A1-0C84EFC51C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ECF09D9-34AC-4214-85A1-0C84EFC51C3E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
