@@ -2,9 +2,29 @@ using System.Text;
 
 namespace OccurrencesAfterBigram;
 
-public class Solution {
-    public string[] FindOcurrences(string text, string first, string second) {
-        var wordsInText = new List<StringBuilder>();
+public class Solution 
+{
+    public string[] FindOcurrences(string text, string first, string second) 
+    {
+        var wordsInText = SplitText(text).ToList();
+
+        var result = new List<string>();
+        var i = 0;
+        while (i < wordsInText.Count - 2)
+        {
+            if (AreStringsEqual(wordsInText[i], first) && AreStringsEqual(wordsInText[i + 1], second))
+            {
+                result.Add(wordsInText[i + 2]);
+            }
+
+            i++;
+        }
+
+        return result.ToArray();
+    }
+
+    public IEnumerable<string> SplitText(string text)
+    {
         var i = 0;
         while (i < text.Length)
         {
@@ -14,94 +34,27 @@ public class Solution {
                 sb.Append(text[i]);
                 i++;
             }
-
-            wordsInText.Add(sb);
+            
             i++;
+            yield return sb.ToString();
         }
-        
-        wordsInText.ForEach(Console.WriteLine);
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
+    }
 
-        var result = new List<string>();
-        i = 0;
-        while (i < wordsInText.Count)
+    public bool AreStringsEqual(string s1, string s2)
+    {
+        if (s1.Length != s2.Length)
         {
-            if (wordsInText[i].Length == first.Length)
-            {
-                var k = i;
-                var firstMatch = true;
-                for (int j = 0; j < wordsInText[k].Length; j++)
-                {
-                    if (wordsInText[k][j] != first[j])
-                    {
-                        firstMatch = false;
-                        break;
-                    }
-                }
-
-                var secondMatch = true;
-                if (firstMatch)
-                {
-                    k++;
-                    if (k < wordsInText.Count && wordsInText[k].Length == second.Length)
-                    {
-                        for (int j = 0; j < wordsInText[k].Length; j++)
-                        {
-                            if (wordsInText[k][j] != second[j])
-                            {
-                                secondMatch = false;
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        secondMatch = false;
-                    }
-                }
-                
-                
-                if (firstMatch && secondMatch && (k + 1) < wordsInText.Count)
-                {
-                    k++;
-                    Console.WriteLine($"{firstMatch} - {secondMatch}");
-                    Console.WriteLine($"{i} - {k} - {wordsInText[k]}");
-                    result.Add(wordsInText[k].ToString());
-                }
-            }
-
-            i++;
+            return false;
         }
-        //
-        // i = 0;
-        // while (i < wordsInText.Count)
-        // {
-        //     var word = wordsInText[i];
-        //     if (word.Length == first.Length)
-        //     {
-        //         var k = i;
-        //         if (word.Equals(first))
-        //         {
-        //             k++;
-        //             word = wordsInText[k];
-        //             if (word.Length == second.Length)
-        //             {
-        //                 if (word.Equals(second))
-        //                 {
-        //                     k++;
-        //                     result.Add(wordsInText[k]);
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     i++;
-        // }
         
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
-        return result.ToArray();
+        for (int j = 0; j < s1.Length; j++)
+        {
+            if (s1[j] != s2[j])
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
