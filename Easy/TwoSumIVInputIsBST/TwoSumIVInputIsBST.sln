@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoSumIVInputIsBST", "TwoSumIVInputIsBST\TwoSumIVInputIsBST.csproj", "{AEFF2BEC-48AC-4D2F-848E-B3FEA407ED5F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEFF2BEC-48AC-4D2F-848E-B3FEA407ED5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEFF2BEC-48AC-4D2F-848E-B3FEA407ED5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEFF2BEC-48AC-4D2F-848E-B3FEA407ED5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEFF2BEC-48AC-4D2F-848E-B3FEA407ED5F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
