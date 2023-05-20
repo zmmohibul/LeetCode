@@ -11,30 +11,28 @@ public class TreeNode {
     }
 }
 
-public class Solution {
-    public bool Found { get; set; } = false;
-    public bool FindTarget(TreeNode root, int k) {
+public class Solution
+{
+    public bool FindTarget(TreeNode root, int k) 
+    {
         var hs = new HashSet<int>();
-        Find(root, k, hs);
-        return Found;
+        return Find(root, k, hs);
         
     }
 
-    public void Find(TreeNode root, int k, HashSet<int> hs)
+    public bool Find(TreeNode root, int k, HashSet<int> hs)
     {
         if (root == null)
         {
-            return;
+            return false;
         }
 
         if (hs.Contains(k - root.val))
         {
-            Found = true;
-            return;
+            return true;
         }
         
         hs.Add(root.val);
-        Find(root.left, k, hs);
-        Find(root.right, k, hs);
+        return Find(root.left, k, hs) || Find(root.right, k, hs);
     }
 }
