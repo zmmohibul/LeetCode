@@ -6,22 +6,28 @@ public class Solution
 {
     public int MinLength(string s)
     {
-        var sb = new StringBuilder(s);
+        var stack = new Stack<char>();
         var i = 0;
-        while (i < sb.Length - 1)
+        while (i < s.Length)
         {
-            var str = $"{sb[i]}{sb[i + 1]}";
-            if (str.Equals("AB") || str.Equals("CD"))
+            var c = s[i];
+            if (stack.Count > 0)
             {
-                sb.Remove(i, 2);
-                i = 0;
+                var last = stack.Pop();
+                var str = $"{last}{c}";
+                if (!str.Equals("AB") && !str.Equals("CD"))
+                {
+                    stack.Push(last);
+                    stack.Push(c);
+                }
             }
             else
             {
-                i++;
+                stack.Push(c);
             }
+            i++;
         }
-
-        return sb.Length;
+        
+        return stack.Count;
     }
 }
