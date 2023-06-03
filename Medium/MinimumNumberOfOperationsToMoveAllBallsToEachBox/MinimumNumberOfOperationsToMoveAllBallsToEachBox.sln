@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimumNumberOfOperationsToMoveAllBallsToEachBox", "MinimumNumberOfOperationsToMoveAllBallsToEachBox.csproj", "{DF402366-8966-459D-B2EF-20184AEB9E60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF402366-8966-459D-B2EF-20184AEB9E60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF402366-8966-459D-B2EF-20184AEB9E60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF402366-8966-459D-B2EF-20184AEB9E60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF402366-8966-459D-B2EF-20184AEB9E60}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
