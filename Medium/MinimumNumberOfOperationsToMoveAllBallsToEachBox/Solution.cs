@@ -4,19 +4,38 @@ public class Solution
 {
     public int[] MinOperations(string boxes)
     {
+        // "110"
+        // [1,1,3]
+        
+        // 0 0 1 0 1 1
+        //         i
+        var ballCount = 0;
+        var operations = 0;
         var answers = new int[boxes.Length];
         for (int i = 0; i < boxes.Length; i++)
         {
-            var operations = 0;
-            for (int j = 0; j < boxes.Length; j++)
+            answers[i] += operations;
+
+            if (boxes[i] == '1')
             {
-                if (boxes[j] == '1')
-                {
-                    operations += (Math.Abs(i - j));
-                }
+                ballCount++;
             }
 
-            answers[i] = operations;
+            operations += ballCount;
+        }
+
+        ballCount = 0;
+        operations = 0;
+        for (int i = boxes.Length - 1; i > -1; i--)
+        {
+            answers[i] += operations;
+
+            if (boxes[i] == '1')
+            {
+                ballCount++;
+            }
+
+            operations += ballCount;
         }
 
         return answers;
