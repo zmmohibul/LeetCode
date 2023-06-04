@@ -18,12 +18,15 @@ public class SparseVector
     // Return the dotProduct of two sparse vectors
     public int DotProduct(SparseVector vec)
     {
+        var v1 = vec.ValueIndices.Count < ValueIndices.Count ? vec.ValueIndices : ValueIndices;
+        var v2 = ValueIndices.Count > vec.ValueIndices.Count ? ValueIndices : vec.ValueIndices;
+        
         var product = 0;
-        foreach (var (index, value) in vec.ValueIndices)
+        foreach (var (index, value) in v1)
         {
-            if (ValueIndices.ContainsKey(index))
+            if (v2.ContainsKey(index))
             {
-                product += (value * ValueIndices[index]);
+                product += (value * v2[index]);
             }
         }
 
