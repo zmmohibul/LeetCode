@@ -11,59 +11,16 @@ public class ListNode {
 
 
 public class Solution {
-    public ListNode DetectCycle(ListNode head) {
+    public ListNode DetectCycle(ListNode head)
+    {
+        var hs = new HashSet<ListNode>();
         var curr = head;
-        while (true)
+        while (curr != null && !hs.Contains(curr))
         {
-            var nd = DetectCycleInside(curr);
-
-            if (nd == curr || nd == null)
-            {
-                return nd;
-            }
-
+            hs.Add(curr);
             curr = curr.next;
         }
-    }
 
-    public ListNode DetectCycleInside(ListNode curr) {
-        var fast = curr;
-        var slow = curr;
-        while (true)
-        {
-            if (slow == null || fast.next == null)
-            {
-                return null;
-            }
-            else {
-                slow = slow.next;
-                if (slow == curr)
-                {
-                    return slow;
-                }
-                
-                fast = fast.next;
-                if (fast == curr)
-                {
-                    return fast;
-                }
-
-                if (fast.next == null)
-                {
-                    return null;
-                }
-
-                fast = fast.next;
-                if (fast == curr)
-                {
-                    return fast;
-                }
-            }
-
-            if (fast == slow)
-            {
-                return fast;
-            }
-        }
+        return curr;
     }
 }
