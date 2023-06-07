@@ -5,22 +5,21 @@ public class Solution
     public Node FindRoot(List<Node> tree)
     {
         var children = new Dictionary<int, Node>();
-        var nodes = new Dictionary<int, Node>();
 
-        foreach (var node in tree)
+        for (int i = 0; i < tree.Count; i++)
         {
-            nodes[node.val] = node;
-
-            foreach (var child in node.children)
+            var node = tree[i];
+            for (int j = 0; j < node.children.Count; j++)
             {
-                nodes[child.val] = child;
+                var child = node.children[j];
                 children[child.val] = child;
             }
         }
 
-        foreach (var (val, node) in nodes)
+        for (int i = 0; i < tree.Count; i++)
         {
-            if (!children.ContainsKey(val))
+            var node = tree[i];
+            if (!children.ContainsKey(node.val))
             {
                 return node;
             }
