@@ -4,24 +4,36 @@ public class Solution
 {
     public Node FindRoot(List<Node> tree)
     {
-        var children = new Dictionary<int, Node>();
+        var node = tree[0];
+        var parent = node;
+        while (true)
+        {
+            parent = FindParent(node, tree);
+            if (parent == null)
+            {
+                return node;
+            }
+            else
+            {
+                node = parent;
+            }
+        }
 
+        
+    }
+
+    public Node FindParent(Node n, List<Node> tree)
+    {
         for (int i = 0; i < tree.Count; i++)
         {
             var node = tree[i];
             for (int j = 0; j < node.children.Count; j++)
             {
                 var child = node.children[j];
-                children[child.val] = child;
-            }
-        }
-
-        for (int i = 0; i < tree.Count; i++)
-        {
-            var node = tree[i];
-            if (!children.ContainsKey(node.val))
-            {
-                return node;
+                if (child.val == n.val)
+                {
+                    return node;
+                }
             }
         }
 
