@@ -5,18 +5,14 @@ public class Solution
     public Node FindRoot(List<Node> tree)
     {
         var childSum = 0;
-        for (int i = 0; i < tree.Count; i++)
-        {
-            for (int j = 0; j < tree[i].children.Count; j++)
-            {
-                childSum += tree[i].children[j].val;
-            }
-        }
-        
         var nodeSum = 0;
         for (int i = 0; i < tree.Count; i++)
         {
             nodeSum += tree[i].val;
+            for (int j = 0; j < tree[i].children.Count; j++)
+            {
+                childSum += tree[i].children[j].val;
+            }
         }
 
         var diff = nodeSum - childSum;
