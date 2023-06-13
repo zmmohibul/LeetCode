@@ -1,28 +1,39 @@
+using System.Text;
+
 namespace EqualRowAndColumnPairs;
 
 public class Solution
 {
     public int EqualPairs(int[][] grid)
     {
-        var count = 0;
-        for (int i = 0; i < grid.Length; i++)
+        var rowFreq = new Dictionary<string, int>();
+        for (int r = 0; r < grid.Length; r++)
         {
-            for (int col = 0; col < grid[i].Length; col++)
+            var sb = new StringBuilder();
+            for (int c = 0; c < grid.Length; c++)
             {
-                var match = true;
-                for (int row = 0; row < grid.Length; row++)
-                {
-                    if (grid[i][row] != grid[row][col])
-                    {
-                        match = false;
-                        break;
-                    }
-                }
+                sb.Append(grid[r][c]);
+                sb.Append('-');
+            }
 
-                if (match)
-                {
-                    count++;
-                }
+            var s = sb.ToString();
+            rowFreq[s] = rowFreq.GetValueOrDefault(s, 0) + 1;
+        }
+        
+        var count = 0;
+        for (int r = 0; r < grid.Length; r++)
+        {
+            var sb = new StringBuilder();
+            for (int c = 0; c < grid.Length; c++)
+            {
+                sb.Append(grid[c][r]);
+                sb.Append('-');
+            }
+
+            var s = sb.ToString();
+            if (rowFreq.ContainsKey(s))
+            {
+                count += rowFreq[s];
             }
         }
 
