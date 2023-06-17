@@ -2,51 +2,57 @@ namespace TimeBasedKeyValueStore;
 
 public class TimeMap 
 {
-    private Dictionary<string, SortedDictionary<int, string>> map;
+    private Dictionary<string, List<Tuple<int, string>>> timeKeyDictionary;
 
     public TimeMap() 
     {
-        map = new Dictionary<string, SortedDictionary<int, string>>();
+        timeKeyDictionary = new Dictionary<string, List<Tuple<int, string>>>();
     }
     
-    public void Set(string key, string value, int timestamp) {
-        if (!map.ContainsKey(key))
+    public void Set(string key, string value, int timestamp) 
+    {
+        if (!timeKeyDictionary.ContainsKey(key))
         {
-            map[key] = new SortedDictionary<int, string>();
+            timeKeyDictionary[key] = new List<Tuple<int, string>>();
         }
 
-        map[key][timestamp] = value;
+        timeKeyDictionary[key].Add(new Tuple<int, string>(timestamp, value));
     }
     
-    public string Get(string key, int timestamp) {
-        if (!map.ContainsKey(key))
+    public string Get(string key, int timestamp) 
+    {
+        if (!timeKeyDictionary.ContainsKey(key))
         {
-            return "";
+            return string.Empty;
         }
 
-        var d = map[key];
-        if (d.Count == 0)
+        var timeValueList = timeKeyDictionary[key];
+        if (timeValueList.Count == 0 || timestamp < timeValueList[0].Item1)
         {
-            return "";
+            return string.Empty;
         }
-        var k = -1;
-        foreach (var (ky, value) in d)
+
+        var low = 0;
+        var high = timeValueList.Count;
+        while (low < high)
         {
-            if (timestamp >= ky)
+            var mid = (high + low) / 2;
+
+            if (timeValueList[mid].Item1 <= timestamp)
             {
-                k = ky;
+                low = mid + 1;
             }
             else
             {
-                break;
+                high = mid;
             }
         }
 
-        if (k < 0)
+        if (high == 0)
         {
             return "";
         }
 
-        return d[k];
+        return timeValueList[high - 1].Item2;
     }
 }
