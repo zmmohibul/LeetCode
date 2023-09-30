@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetterCasePermutation", "LetterCasePermutation.csproj", "{F65F3200-F1BE-4BE2-B8EF-7E5415804839}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F65F3200-F1BE-4BE2-B8EF-7E5415804839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F65F3200-F1BE-4BE2-B8EF-7E5415804839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F65F3200-F1BE-4BE2-B8EF-7E5415804839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F65F3200-F1BE-4BE2-B8EF-7E5415804839}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
