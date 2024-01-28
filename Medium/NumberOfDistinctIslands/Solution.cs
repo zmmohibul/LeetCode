@@ -1,89 +1,38 @@
+using System.Text;
+
 namespace NumberOfDistinctIslands;
 
 public class Solution 
 {
+    int rowOrigin = 0;
+    int colOrigin = 0;
     public int NumDistinctIslands(int[][] grid) 
     {
-        var componentsInGrid = new List<HashSet<Tuple<int, int>>>();
+        var stringComps = new HashSet<string>();
         for (var row = 0; row < grid.Length; row++)
         {
             for (var col = 0; col < grid[0].Length; col++)
             {
                 if (grid[row][col] == 1)
                 {
+                    rowOrigin = row;
+                    colOrigin = col;
+
                     var nodesInComponent = new HashSet<Tuple<int, int>>();
                     Dfs(grid, nodesInComponent, row, col);
-                    componentsInGrid.Add(nodesInComponent);
-                }
-            }
-        }
-
-        var equalGraphIndices = new HashSet<int>();
-        var equalGraphGroups = new List<HashSet<int>>();
-        for (int i = 0; i < componentsInGrid.Count; i++) 
-        {
-            if (equalGraphIndices.Contains(i)) 
-            {
-                continue;
-            }
-
-            var equalGraphGroup = new HashSet<int>() {i};
-            var comp1 = componentsInGrid[i];
-            for (int j = i + 1; j < componentsInGrid.Count; j++) 
-            {
-                if (j != i) 
-                {
-                    var comp2 = componentsInGrid[j];
-                    if (comp2.Count == comp1.Count) {
-                        var equalGraph = true;
-
-                        var node1 = comp1.ElementAt(0);
-                        var node2 = comp2.ElementAt(0);
-
-                        var rowDiff = Math.Abs(node2.Item1 - node1.Item1);
-                        var colDiff = Math.Abs(node2.Item2 - node1.Item2);
-
-                        for (int k = 1; k < comp1.Count; k++) 
-                        {
-                            node1 = comp1.ElementAt(k);
-                            node2 = comp2.ElementAt(k);
-                            
-                            if (Math.Abs(node2.Item1 - node1.Item1) != rowDiff || 
-                                Math.Abs(node2.Item2 - node1.Item2) != colDiff) 
-                            {
-                                equalGraph = false;
-                                break;
-                            }
-                        }
-
-                        if (equalGraph) 
-                        {
-                            equalGraphIndices.Add(i);
-                            equalGraphIndices.Add(j);
-                            equalGraphGroup.Add(j);
-                        }
+                    
+                    var sb = new StringBuilder();
+                    foreach (var item in nodesInComponent) 
+                    {
+                        sb.Append($"({item.Item1}-{item.Item2})-");
                     }
+                    
+                    stringComps.Add(sb.ToString());
                 }
             }
-
-            if (equalGraphGroup.Count > 1) 
-            {
-                equalGraphGroups.Add(equalGraphGroup);
-            }
         }
 
-        var distinctCount = 0;
-        for (int i = 0; i < componentsInGrid.Count; i++) 
-        {
-            if (!equalGraphIndices.Contains(i)) 
-            {
-                distinctCount++;
-            }
-        }
-
-        distinctCount += equalGraphGroups.Count;
-
-        return distinctCount;
+        return stringComps.Count;
     }
 
     public void Dfs(int[][] grid, HashSet<Tuple<int, int>> vertices, int row, int col)
@@ -93,7 +42,7 @@ public class Solution
             return;
         }
 
-        vertices.Add(new Tuple<int, int>(row, col));
+        vertices.Add(new Tuple<int, int>(row - rowOrigin, col - colOrigin));
         grid[row][col] = 2;
         
         Dfs(grid, vertices, row + 1, col);
