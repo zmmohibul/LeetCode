@@ -1,56 +1,38 @@
 namespace NumberOfDistinctIslands;
 
-public class Solution {
-    bool equalGraph = true;
-    public int NumDistinctIslands(int[][] grid) {
-        var adj = GetAdj(grid);
-        if (adj.Count == 0) {
-            return 0;
-        }
-
+public class Solution 
+{
+    public int NumDistinctIslands(int[][] grid) 
+    {
         var componentsInGrid = new List<HashSet<Tuple<int, int>>>();
-        var currComponent = new HashSet<Tuple<int, int>>();
-
-        var visited = new HashSet<Tuple<int, int>>();
-        var queue = new Queue<Tuple<int, int>>();
-        queue.Enqueue(adj.ElementAt(0).Key);
-
-        while (queue.Count > 0) {
-            var u = queue.Dequeue();
-            visited.Add(u);
-
-            if (adj.ContainsKey(u)) {
-                currComponent.Add(u);
-                foreach (var v in adj[u]) {
-                    if (!visited.Contains(v)) {
-                        queue.Enqueue(v);
-                    }
+        for (var row = 0; row < grid.Length; row++)
+        {
+            for (var col = 0; col < grid[0].Length; col++)
+            {
+                if (grid[row][col] == 1)
+                {
+                    var nodesInComponent = new HashSet<Tuple<int, int>>();
+                    Dfs(grid, nodesInComponent, row, col);
+                    componentsInGrid.Add(nodesInComponent);
                 }
-
-                adj.Remove(u);
             }
-
-            if (queue.Count == 0 && adj.Count != 0) {
-                componentsInGrid.Add(currComponent);
-                currComponent = new();
-
-                queue.Enqueue(adj.ElementAt(0).Key);
-            } 
         }
-
-        componentsInGrid.Add(currComponent);
 
         var equalGraphIndices = new HashSet<int>();
         var equalGraphGroups = new List<HashSet<int>>();
-        for (int i = 0; i < componentsInGrid.Count; i++) {
-            if (equalGraphIndices.Contains(i)) {
+        for (int i = 0; i < componentsInGrid.Count; i++) 
+        {
+            if (equalGraphIndices.Contains(i)) 
+            {
                 continue;
             }
 
             var equalGraphGroup = new HashSet<int>() {i};
             var comp1 = componentsInGrid[i];
-            for (int j = i + 1; j < componentsInGrid.Count; j++) {
-                if (j != i) {
+            for (int j = i + 1; j < componentsInGrid.Count; j++) 
+            {
+                if (j != i) 
+                {
                     var comp2 = componentsInGrid[j];
                     if (comp2.Count == comp1.Count) {
                         var equalGraph = true;
@@ -61,19 +43,21 @@ public class Solution {
                         var rowDiff = Math.Abs(node2.Item1 - node1.Item1);
                         var colDiff = Math.Abs(node2.Item2 - node1.Item2);
 
-                        for (int k = 1; k < comp1.Count; k++) {
+                        for (int k = 1; k < comp1.Count; k++) 
+                        {
                             node1 = comp1.ElementAt(k);
                             node2 = comp2.ElementAt(k);
                             
-                            if (Math.Abs(node2.Item1 - node1.Item1) != rowDiff
-                                || Math.Abs(node2.Item2 - node1.Item2) != colDiff
-                               ) {
+                            if (Math.Abs(node2.Item1 - node1.Item1) != rowDiff || 
+                                Math.Abs(node2.Item2 - node1.Item2) != colDiff) 
+                            {
                                 equalGraph = false;
                                 break;
                             }
                         }
 
-                        if (equalGraph) {
+                        if (equalGraph) 
+                        {
                             equalGraphIndices.Add(i);
                             equalGraphIndices.Add(j);
                             equalGraphGroup.Add(j);
@@ -82,14 +66,17 @@ public class Solution {
                 }
             }
 
-            if (equalGraphGroup.Count > 1) {
+            if (equalGraphGroup.Count > 1) 
+            {
                 equalGraphGroups.Add(equalGraphGroup);
             }
         }
 
         var distinctCount = 0;
-        for (int i = 0; i < componentsInGrid.Count; i++) {
-            if (!equalGraphIndices.Contains(i)) {
+        for (int i = 0; i < componentsInGrid.Count; i++) 
+        {
+            if (!equalGraphIndices.Contains(i)) 
+            {
                 distinctCount++;
             }
         }
@@ -99,38 +86,36 @@ public class Solution {
         return distinctCount;
     }
 
-    public Dictionary<Tuple<int, int>, List<Tuple<int, int>>> GetAdj(int[][] grid) {
-        int m = grid.Length;
-        int n = grid[0].Length;
-        var adj = new Dictionary<Tuple<int, int>, List<Tuple<int, int>>>();
-        for (int row = 0; row < m; row++) {
-            for (int col = 0; col < n; col++) {
-                if (grid[row][col] == 1) {
-                    var u = new Tuple<int, int>(row, col);
-                    if (!adj.ContainsKey(u)) {
-                        adj[u] = new();
-                    }
-
-                    if (row + 1 < m && grid[row + 1][col] == 1) {
-                        adj[u].Add(new Tuple<int, int>(row + 1, col));
-                    }
-
-                    if (row - 1 > -1 && grid[row - 1][col] == 1) {
-                        adj[u].Add(new Tuple<int, int>(row - 1, col));
-                    }
-
-                    if (col + 1 < n && grid[row][col + 1] == 1) {
-                        adj[u].Add(new Tuple<int, int>(row, col + 1));
-                    }
-
-                    if (col - 1 > -1 && grid[row][col - 1] == 1) {
-                        adj[u].Add(new Tuple<int, int>(row, col - 1));
-                    }
-                }
-            }
+    public void Dfs(int[][] grid, HashSet<Tuple<int, int>> vertices, int row, int col)
+    {
+        if (!InBound(grid, row, col))
+        {
+            return;
         }
 
-        return adj;
+        vertices.Add(new Tuple<int, int>(row, col));
+        grid[row][col] = 2;
+        
+        Dfs(grid, vertices, row + 1, col);
+        Dfs(grid, vertices, row - 1, col);
+        Dfs(grid, vertices, row, col + 1);
+        Dfs(grid, vertices, row, col - 1);
+
+    }
+    
+    public bool InBound(int[][] grid, int row1, int col1) 
+    {
+        if (row1 == -1
+            || row1 == grid.Length
+            || col1 == grid[0].Length
+            || col1 == -1
+            || grid[row1][col1] == 0
+            || grid[row1][col1] == 2
+           ) {
+            return false;
+        }
+
+        return true;
     }
 }
 
