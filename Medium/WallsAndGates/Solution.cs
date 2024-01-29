@@ -1,13 +1,28 @@
 namespace WallsAndGates;
 
 public class Solution {
-    HashSet<Tuple<int, int>> roomTuples = new();
-    HashSet<Tuple<int, int>> gates = new();
-    public void WallsAndGates(int[][] rooms) {
-        var adj = GetAdj(rooms);
-        if (gates.Count == 0 || roomTuples.Count == 0)
+    private readonly HashSet<Tuple<int, int>> roomTuples = new();
+    private readonly HashSet<Tuple<int, int>> gates = new();
+    private HashSet<Tuple<int, int>> nexLevelQueue = new();
+    private readonly HashSet<Tuple<int, int>> visited = new();
+    private int[][] rooms;
+    public void WallsAndGates(int[][] rooms)
+    {
+        this.rooms = rooms;
+        for (var row = 0; row < rooms.Length; row++)
         {
-            return;
+            for (var col = 0; col < rooms[0].Length; col++)
+            {
+                var tuple = new Tuple<int, int>(row, col);
+                if (rooms[row][col] == 0)
+                {
+                    gates.Add(tuple);
+                }
+                else if (rooms[row][col] == 2147483647)
+                {
+                    roomTuples.Add(tuple);
+                }
+            }
         }
 
         var queue = new HashSet<Tuple<int, int>>();
@@ -15,101 +30,49 @@ public class Solution {
         {
             queue.Add(gate);
         }
-
-        var visited = new HashSet<Tuple<int, int>>();
-        var level = 0;
         
+        var level = 1;
         while (queue.Count > 0)
         {
-            var queueCount = queue.Count;
             var newQueue = new HashSet<Tuple<int, int>>();
-            for (int i = 0; i < queueCount; i++)
+            for (var i = 0; i < queue.Count; i++)
             {
-                var u = queue.First();
-                queue.Remove(u);
+                var u = queue.ElementAt(i);
                 visited.Add(u);
 
-                Console.Write($"({u.Item1}, {u.Item2}), ");
+                var uRow = u.Item1;
+                var uCol = u.Item2;
+                
+                var top = new Tuple<int, int>(uRow + 1, uCol);
+                CheckRoomTuple(top, level);
+                
+                var bottom = new Tuple<int, int>(uRow - 1, uCol);
+                CheckRoomTuple(bottom, level);
 
+                var right = new Tuple<int, int>(uRow, uCol + 1);
+                CheckRoomTuple(right, level);
 
-                if (roomTuples.Contains(u))
-                {
-                    var row = u.Item1;
-                    var col = u.Item2;
-                    if (rooms[row][col] > level) 
-                    {
-                        rooms[row][col] = level;
-                    }
-
-                    roomTuples.Remove(u);
-                }
-
-                foreach (var v in adj[u])
-                {
-                    if (!visited.Contains(v) && roomTuples.Contains(v))
-                    {
-                        newQueue.Add(v);
-                    }
-                }
+                var left = new Tuple<int, int>(uRow, uCol - 1);
+                CheckRoomTuple(left, level);
             }
 
-            Console.WriteLine();
-            queue = newQueue;
             level++;
+            queue = nexLevelQueue;
+            nexLevelQueue = new();
         }
-
-        return;
     }
 
-    public Dictionary<Tuple<int, int>, List<Tuple<int, int>>> GetAdj(int[][] grid)
+    private void CheckRoomTuple(Tuple<int, int> tuple, int level)
     {
-        var adj = new Dictionary<Tuple<int, int>, List<Tuple<int, int>>>();
-        for (int row = 0; row < grid.Length; row++)
+        if (roomTuples.Contains(tuple))
         {
-            for (int col = 0; col < grid[0].Length; col++)
+            rooms[tuple.Item1][tuple.Item2] = level;
+            roomTuples.Remove(tuple);
+            
+            if (!visited.Contains(tuple))
             {
-                var val = grid[row][col];
-                if (val != -1)
-                {
-                    var t = new Tuple<int, int>(row, col);
-
-                    if (val == 0) 
-                    {
-                        gates.Add(t);
-                    }
-                    else 
-                    {
-                        roomTuples.Add(t);
-                    }
-
-                    if (!adj.ContainsKey(t))
-                    {
-                        adj[t] = new();
-                    }
-
-                    if (row + 1 != grid.Length && grid[row + 1][col] != -1)
-                    {
-                        adj[t].Add(new Tuple<int, int>(row + 1, col));
-                    }
-
-                    if (row - 1 != -1 && grid[row - 1][col] != -1)
-                    {
-                        adj[t].Add(new Tuple<int, int>(row - 1, col));
-                    }
-
-                    if (col + 1 != grid[0].Length && grid[row][col + 1] != -1)
-                    {
-                        adj[t].Add(new Tuple<int, int>(row, col + 1));
-                    }
-
-                    if (col - 1 != -1 && grid[row][col - 1] != -1)
-                    {
-                        adj[t].Add(new Tuple<int, int>(row, col - 1));
-                    }
-                }
+                nexLevelQueue.Add(tuple);
             }
         }
-
-        return adj;
     }
 }
