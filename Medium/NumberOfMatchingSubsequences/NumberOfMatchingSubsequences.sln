@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberOfMatchingSubsequences", "NumberOfMatchingSubsequences.csproj", "{76ECAD8E-8D97-4490-8924-7FCDE9D93489}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76ECAD8E-8D97-4490-8924-7FCDE9D93489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76ECAD8E-8D97-4490-8924-7FCDE9D93489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76ECAD8E-8D97-4490-8924-7FCDE9D93489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76ECAD8E-8D97-4490-8924-7FCDE9D93489}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
